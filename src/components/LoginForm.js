@@ -12,6 +12,7 @@ export default class LoginForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+    this.props.history.push("/dash");
   }
 
   handleChange = (event) => {
