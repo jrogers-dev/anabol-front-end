@@ -6,6 +6,14 @@ export default class Landing extends Component {
 
   }
 
+  handleLoginClick = (event) => {
+    this.props.history.push("/login");
+  }
+
+  handleSignupClick = (event) => {
+    this.props.history.push("/signup");
+  }
+
   render() {
     return (
       <>
@@ -17,8 +25,8 @@ export default class Landing extends Component {
           Filter results based on your preferred diet. <br/>
         </p>
         <br/>
-        <button>Log In</button>
-        <button>Sign Up</button>
+        <button onClick={this.handleLoginClick}>Log In</button>
+        <button onClick={this.handleSignupClick}>Sign Up</button>
       </>
     )
   }
