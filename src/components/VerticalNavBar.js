@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 
 export default class VerticalNavBar extends Component {
-  constructor(props) {
-    super(props);
-
-  }
 
   render() {
     return (
@@ -39,7 +35,7 @@ export default class VerticalNavBar extends Component {
         >Recipes</NavLink>
         <br />
         <NavLink 
-          to="/dash/logout" 
+          to="/logout" 
           exact 
           style={{color: "lightblue"}} 
           activeStyle={{ color: "green"}}
