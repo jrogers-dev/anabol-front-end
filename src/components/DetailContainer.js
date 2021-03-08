@@ -15,7 +15,7 @@ export default class DetailView extends Component {
         <hr />
         <Route exact path="/dash/today" component={DayDetail} />
         <Route exact path="/dash/today/add" component={FoodSearch} />
-        <Route path="/dash/calendar" component={CalendarIndexDetail} />
+        <Route exact path="/dash/calendar" component={CalendarIndexDetail} />
         <Route exact path="/dash/pantry" component={PantryIndexDetail} />
         <Route exact path="/dash/recipes" component={RecipesIndexDetail} />
       </>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import VerticalNavBar from './VerticalNavBar.js';
-import DetailView from './DetailView.js';
+import DetailContainer from './DetailContainer.js';
 
 export default class Landing extends Component {
 
@@ -8,7 +8,7 @@ export default class Landing extends Component {
     return (
       <>
         <VerticalNavBar />
-        <DetailView />
+        <DetailContainer />
       </>
     )
   }
