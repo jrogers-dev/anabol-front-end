@@ -1,4 +1,3 @@
-import './App.css';
 import Landing from './components/Landing.js';
 import LoginForm from './components/LoginForm.js';
 import RegistrationForm from './components/RegistrationForm.js';
