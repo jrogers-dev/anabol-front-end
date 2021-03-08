@@ -8,14 +8,9 @@ import RegistrationForm from './components/RegistrationForm.js';
 import DashContainer from './components/DashContainer.js';
 import Logout from './components/Logout.js';
 
-import { fetchFoods } from './actions/foodActions.js';
-
-
 class App extends Component {
 
   componentDidMount() {
-    console.log("App.js@15");
-    this.props.fetchFoods();
     //Fetch necessary data
   }
 
@@ -42,7 +37,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchFoods: () => dispatch(fetchFoods())
+    
   }
 }
 
