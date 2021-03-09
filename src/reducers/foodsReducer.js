@@ -3,7 +3,7 @@ const foodsReducer = (state = { foods: [], loading: false }, action) => {
     case "LOADING_FOODS":
       return {
         ...state,
-        foods: [...state.foods],
+        foods: [],
         loading: true
       };
     case "ADD_FOODS":

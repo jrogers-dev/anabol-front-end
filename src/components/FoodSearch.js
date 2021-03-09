@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchFoods } from '../actions/foodActions';
 
+import FoodList from './FoodList';
+
 
 class FoodSearch extends Component {
   constructor(props) {
@@ -28,6 +30,8 @@ class FoodSearch extends Component {
           <input type="text" placeholder="Search..." value={this.state.searchTerm} onChange={this.handleChange} />
           <br />
           <input type="submit" value="Search" />
+          <br />
+          <FoodList foods={this.props.foods} />
         </form>
       </>
     )
@@ -36,7 +40,7 @@ class FoodSearch extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    ...state
+    foods: state.foods
   }
 };
 

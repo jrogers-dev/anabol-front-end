@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 
-export default class CalendarIndexDetail extends Component {
 
+class FoodList extends Component {
   render() {
     return (
       <>
-       <span>Calendar Index!</span>
+        
       </>
     )
   }
 }
+
+
+export default FoodList;

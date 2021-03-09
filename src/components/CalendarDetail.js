@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-export default class PantryIndexDetail extends Component {
+export default class CalendarDetail extends Component {
 
   render() {
     return (
       <>
-       <span>Pantry Index!</span>
+       <span>Calendar Detail!</span>
       </>
     )
   }
