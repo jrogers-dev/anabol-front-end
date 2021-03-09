@@ -4,11 +4,11 @@ import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import foodsReducer from './reducers/foodsReducer.js';
+import rootReducer from './reducers/rootReducer.js';
 
 import App from './App';
 
-const store = createStore(foodsReducer, applyMiddleware(thunk));
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 ReactDOM.render(
   <Provider store={store}>

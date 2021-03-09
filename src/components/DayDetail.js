@@ -3,10 +3,14 @@ import { NavLink } from 'react-router-dom';
 
 export default class DayDetail extends Component {
 
+  componentDidMount() {
+    
+  }
+
   render() {
     return (
       <>
-       <h1>Summary for *insert date*</h1>
+       <h1>Summary for:</h1>
        <br />
        <h3>Protein:</h3>
        <br />
