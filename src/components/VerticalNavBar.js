@@ -7,7 +7,7 @@ export default class VerticalNavBar extends Component {
     return (
       <>
         <NavLink 
-          to="/dash/today" 
+          to="/dash/days/today" 
           exact 
           style={{color: "lightblue"}} 
           activeStyle={{ color: "green"}}
