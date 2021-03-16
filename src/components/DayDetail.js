@@ -8,12 +8,12 @@ export default class DayDetail extends Component {
 
     this.state = {
       loading: true,
-      dateString: props.location.pathname.split('/')[3]
+      id: props.match.params.id
     }
   }
 
   componentDidMount() {
-    fetch(`http://localhost:3000/days/${this.state.dateString}`)
+    fetch(`http://localhost:3000/days/${this.state.id}`)
       .then(response => response.json())
       .then(json => {
         if(json.status === 404 && json.exception.includes("RecordNotFound")) {
@@ -25,7 +25,7 @@ export default class DayDetail extends Component {
                 "Content-Type": "application/json",
                 "Accept": "application/json"
               },
-              body: JSON.stringify({day: {id: this.state.dateString, user_id: 1, date: new Date(this.state.dateString)}})
+              body: JSON.stringify({day: {id: this.state.id, user_id: 1, date: new Date(this.state.id)}})
             }
           ).then(response => response.json()).then(json => {
             this.setState({
@@ -60,7 +60,7 @@ export default class DayDetail extends Component {
     else {
       return (
         <>
-        <h1>Summary for: {Date(this.state.dateString)}</h1>
+        <h1>Summary for: {Date(this.state.id)}</h1>
         <br />
         <h3>Protein:</h3>
         <br />
@@ -74,7 +74,7 @@ export default class DayDetail extends Component {
         <br />
         <h3>*List Foods*</h3>
         <br />
-        <h3><NavLink to={`/dash/days/${this.state.dateString}/add`}>Add Food</NavLink></h3>
+        <h3><NavLink to={`/dash/days/${this.state.id}/add`}>Add Food</NavLink></h3>
         </>
       )
     }
