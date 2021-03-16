@@ -3,11 +3,21 @@ import { NavLink } from 'react-router-dom';
 
 export default class VerticalNavBar extends Component {
 
+  dateString(date, separator = "") {
+    function pad(n){
+      return n < 10 ? '0'+n : n
+    }
+    
+    return date.getFullYear()+separator
+    + pad(date.getMonth()+1)+separator
+    + pad(date.getDate());
+  }
+
   render() {
     return (
       <>
         <NavLink 
-          to="/dash/days/today" 
+          to={`/dash/days/${this.dateString(new Date())}`}
           exact 
           style={{color: "lightblue"}} 
           activeStyle={{ color: "green"}}

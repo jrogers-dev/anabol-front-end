@@ -7,61 +7,48 @@ export default class DayDetail extends Component {
     super(props);
 
     this.state = {
-      loading: true
+      loading: true,
+      dateString: props.location.pathname.split('/')[3]
     }
-  }
-
-  dateString(date, separator = "") {
-    function pad(n){
-      return n < 10 ? '0'+n : n
-    }
-    
-    return date.getFullYear()+separator
-    + pad(date.getMonth()+1)+separator
-    + pad(date.getDate());
   }
 
   componentDidMount() {
-    if (this.props.location.pathname === "/dash/day/today") {
-      let d = new Date();
-
-      fetch(`http://localhost:3000/days/20210316`)
-        .then(response => response.json())
-        .then(json => {
-          if(json.status === 404 && json.exception.includes("RecordNotFound")) {
-            fetch(
-              `http://localhost:3000/days`,
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                  "Accept": "application/json"
-                },
-                body: JSON.stringify({day: {id: 20210316, user_id: 1, date: this.dateString(d, "-")}})
-              }
-            ).then(response => response.json()).then(json => {
-              this.setState({
-                ...this.state,
-                [json.data.attributes.id]: {
-                  user_id: json.data.attributes.user_id,
-                  date: json.data.attributes.date
-                }
-              }, () => {console.log(this.state)})
-            })
-          } 
-          else {
+    fetch(`http://localhost:3000/days/${this.state.dateString}`)
+      .then(response => response.json())
+      .then(json => {
+        if(json.status === 404 && json.exception.includes("RecordNotFound")) {
+          fetch(
+            `http://localhost:3000/days`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+              },
+              body: JSON.stringify({day: {id: this.state.dateString, user_id: 1, date: new Date(this.state.dateString)}})
+            }
+          ).then(response => response.json()).then(json => {
             this.setState({
-              loading: false,
+              ...this.state,
               [json.data.attributes.id]: {
                 user_id: json.data.attributes.user_id,
                 date: json.data.attributes.date
               }
-            }, () => {console.log(this.state)})
-          }
-        })
-        .catch(err => console.log(err))
-      ;
-    }
+            })
+          })
+        } 
+        else {
+          this.setState({
+            loading: false,
+            [json.data.attributes.id]: {
+              user_id: json.data.attributes.user_id,
+              date: json.data.attributes.date
+            }
+          })
+        }
+      })
+      .catch(err => console.log(err))
+    ;
   }
 
   render() {
@@ -73,7 +60,7 @@ export default class DayDetail extends Component {
     else {
       return (
         <>
-        <h1>Summary for: {this.state[20210316].date}</h1>
+        <h1>Summary for: {Date(this.state.dateString)}</h1>
         <br />
         <h3>Protein:</h3>
         <br />
@@ -87,7 +74,7 @@ export default class DayDetail extends Component {
         <br />
         <h3>*List Foods*</h3>
         <br />
-        <h3><NavLink to="/dash/today/add">Add Food</NavLink></h3>
+        <h3><NavLink to={`/dash/days/${this.state.dateString}/add`}>Add Food</NavLink></h3>
         </>
       )
     }
