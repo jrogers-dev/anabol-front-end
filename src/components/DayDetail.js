@@ -12,6 +12,14 @@ export default class DayDetail extends Component {
     }
   }
 
+  dateStringWithHyphens(dateString) {
+    return (
+      dateString.substring(0,4)
+      + '-' + dateString.substring(4,6)
+      + '-' + dateString.substring(6,8)
+    );
+  }
+
   componentDidMount() {
     fetch(`http://localhost:3000/days/${this.state.id}`)
       .then(response => response.json())
@@ -25,11 +33,12 @@ export default class DayDetail extends Component {
                 "Content-Type": "application/json",
                 "Accept": "application/json"
               },
-              body: JSON.stringify({day: {id: this.state.id, user_id: 1, date: new Date(this.state.id)}})
+              body: JSON.stringify({day: {id: this.state.id, user_id: 1, date: new Date(this.dateStringWithHyphens(this.state.id)) }})
             }
           ).then(response => response.json()).then(json => {
             this.setState({
               ...this.state,
+              loading: false,
               [json.data.attributes.id]: {
                 user_id: json.data.attributes.user_id,
                 date: json.data.attributes.date
@@ -39,6 +48,7 @@ export default class DayDetail extends Component {
         } 
         else {
           this.setState({
+            ...this.state,
             loading: false,
             [json.data.attributes.id]: {
               user_id: json.data.attributes.user_id,
@@ -60,7 +70,7 @@ export default class DayDetail extends Component {
     else {
       return (
         <>
-        <h1>Summary for: {Date(this.state.id)}</h1>
+        <h1>Summary for: {new Date(this.state[this.state.id].date).toUTCString()}</h1>
         <br />
         <h3>Protein:</h3>
         <br />
