@@ -10,7 +10,8 @@ class FoodSearch extends Component {
     super(props);
 
     this.state = {
-      searchTerm: ""
+      searchTerm: "",
+      id: props.match.params.id
     };
   }
 
@@ -31,7 +32,7 @@ class FoodSearch extends Component {
           <br />
           <input type="submit" value="Search" />
           <br />
-          <FoodList foods={this.props.foods} />
+          <FoodList foods={this.props.foods} id={this.state.id}/>
         </form>
       </>
     )
