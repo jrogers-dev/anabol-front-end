@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+
 import DayDetail from './DayDetail';
 import FoodSearch from './FoodSearch';
 import CalendarDetail from './CalendarDetail';
@@ -7,7 +10,18 @@ import PantryDetail from './PantryDetail';
 import RecipesDetail from './RecipesDetail';
 
 
-export default class DetailView extends Component {
+class DetailView extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      loading: true
+    }
+  }
+
+  componentDidMount() {
+    
+  }
 
   render() {
     return (
@@ -22,3 +36,17 @@ export default class DetailView extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    ...state
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DetailView);

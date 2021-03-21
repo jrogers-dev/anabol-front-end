@@ -8,11 +8,7 @@ import RegistrationForm from './components/RegistrationForm.js';
 import DashContainer from './components/DashContainer.js';
 import Logout from './components/Logout.js';
 
-class App extends Component {
-
-  componentDidMount() {
-    //Fetch necessary data
-  }
+export default class App extends Component {
 
   render() {
     return (
@@ -28,17 +24,3 @@ class App extends Component {
     );
   }
 }
-
-const mapStateToProps = (state) => {
-  return {
-    ...state
-  }
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);

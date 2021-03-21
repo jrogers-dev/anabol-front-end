@@ -49,12 +49,28 @@ export default class DayDetail extends Component {
         else {
           this.setState({
             ...this.state,
-            loading: false,
-            [json.data.attributes.id]: {
+            [this.state.id]: {
               user_id: json.data.attributes.user_id,
-              date: json.data.attributes.date
+              date: json.data.attributes.date,
+              protein: 0,
+              carbs: 0,
+              fat: 0,
+              calories: 0
             }
-          })
+          });
+
+          fetch(`http://localhost:3000/days/${this.state.id}/meals`)
+            .then(response => response.json())
+            .then(json => {
+              this.setState({
+                ...this.state,
+                loading: false,
+                [this.state.id]: {
+                  ...this.state[this.state.id],
+                  meals: json.data
+                }
+              })
+            });
         }
       })
       .catch(err => console.log(err))
@@ -72,17 +88,17 @@ export default class DayDetail extends Component {
         <>
         <h1>Summary for: {new Date(this.state[this.state.id].date).toUTCString()}</h1>
         <br />
-        <h3>Protein:</h3>
+        <h3>Protein: {this.state[this.state.id].protein}</h3>
         <br />
-        <h3>Carbs:</h3>
+        <h3>Carbs: {this.state[this.state.id].carbs}</h3>
         <br />
-        <h3>Fat:</h3>
+        <h3>Fat: {this.state[this.state.id].fat}</h3>
         <br />
-        <h3>Calories:</h3>
+        <h3>Calories: {this.state[this.state.id].calories}</h3>
         <hr />
         <h2>Foods</h2>
         <br />
-        <h3>*List Foods*</h3>
+        <h3>{this.state[this.state.id].meals.filter(meal => meal.attributes.name === "breakfast").map(m => <p>{m.attributes.food_id}</p>)}</h3>
         <br />
         <h3><NavLink to={`/dash/days/${this.state.id}/add`}>Add Food</NavLink></h3>
         </>
