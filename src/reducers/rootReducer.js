@@ -1,28 +1,22 @@
 export default function rootReducer(state = { foods: [], days: {}, loading: false }, action) {
   switch (action.type) {
-    case "LOADING_FOODS":
+    case "LOADING":
       return {
         ...state,
         loading: true
       };
-    case "ADD_FOODS":
+    case "LOAD_FOODS":
       return {
         ...state,
         foods: action.foods,
         loading: false
       };
-    case "DELETE_FOODS":
+    case "DELETE_FOOD":
       return {
         ...state,
-        foods: [],
         loading: false
       };
-    case "LOADING_DAYS":
-      return {
-        ...state,
-        loading: true
-      };
-    case "ADD_DAYS":
+    case "LOAD_DAYS":
       let days_hash = {};
       if (action.days) {
         action.days.forEach(day => { days_hash[day.attributes.id] = day.attributes.date });
@@ -33,6 +27,17 @@ export default function rootReducer(state = { foods: [], days: {}, loading: fals
         loading: false
       };
     case "DELETE_DAY":
+      return {
+        ...state,
+        loading: false
+      };
+    case "LOAD_MEALS":
+      return {
+        ...state,
+        meals: action.meals,
+        loading: false
+      };
+    case "DELETE_MEAL":
       return {
         ...state,
         loading: false

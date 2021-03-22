@@ -28,10 +28,10 @@ class DetailContainer extends Component {
       return (
         <>
           <hr />
-          <Route exact path="/dash/days/:id" component={DayDetail} />
+          <Route exact path="/dash/days/:id" render={(props) => <DayDetail {...props} days={this.props.days}/>} />
           <Route exact path="/dash/days/:id/add" component={FoodSearch} />
-          <Route exact path="/dash/calendar" component={CalendarDetail} />
-          <Route exact path="/dash/pantry" component={PantryDetail} />
+          <Route exact path="/dash/calendar" render={(props) => <CalendarDetail {...props} days={this.props.days}/>} />
+          <Route exact path="/dash/pantry" render={(props) => <PantryDetail {...props} foods={this.props.foods}/>} />
           <Route exact path="/dash/recipes" component={RecipesDetail} />
         </>
       );

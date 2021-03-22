@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 
 
 class FoodList extends Component {
+  
   handleClick = (event) => {
     event.preventDefault();
     let selectedFood = this.props.foods.hits.filter(food => food._id === event.target.id)[0];
-    console.log(selectedFood);
 
     fetch(
       `http://localhost:3000/foods`,
