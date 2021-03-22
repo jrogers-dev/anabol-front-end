@@ -72,11 +72,20 @@ export default class DayDetail extends Component {
       <h3>Calories: {this.state.todays_calories}kcal</h3>
       <hr />
       <h2>Foods</h2>
+      <h4>&emsp;<NavLink to={`/dash/days/${this.props.match.params.id}/add`}>Add Food</NavLink></h4>
       <br />
       <h3>Breakfast</h3>
-      <h4>{this.state.todays_breakfast.map(food => <p>{food.attributes.name}</p>)}</h4>
+      <h4>{this.state.todays_breakfast.map(food => <p>&emsp;{food.attributes.name}</p>)}</h4>
       <br />
-      <h3><NavLink to={`/dash/days/${this.props.match.params.id}/add`}>Add Food</NavLink></h3>
+      <h3>Lunch</h3>
+      <h4>{this.state.todays_lunch.map(food => <p>&emsp;{food.attributes.name}</p>)}</h4>
+      <br />
+      <h3>Dinner</h3>
+      <h4>{this.state.todays_dinner.map(food => <p>&emsp;{food.attributes.name}</p>)}</h4>
+      <br />
+      <h3>Snacks</h3>
+      <h4>{this.state.todays_snacks.map(food => <p>&emsp;{food.attributes.name}</p>)}</h4>
+      <br />
       </>
     );
   }

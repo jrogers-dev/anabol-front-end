@@ -32,7 +32,7 @@ class FoodList extends Component {
     .then(response => response.json())
     .then(json => {
       fetch(
-        `http://localhost:3000/days/${this.props.id}/meals`,
+        `http://localhost:3000/meals`,
         {
           method: "POST",
           headers: {

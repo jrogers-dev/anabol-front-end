@@ -10,8 +10,10 @@ class FoodSearch extends Component {
     super(props);
 
     this.state = {
+      loading: false,
       searchTerm: "",
-      id: props.match.params.id
+      id: props.match.params.id,
+      found_foods: []
     };
   }
 
@@ -21,21 +23,50 @@ class FoodSearch extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.fetchFoods(this.state.searchTerm);
+    this.searchFoods(this.state.searchTerm);
+  }
+
+  searchFoods(searchTerm) {
+    this.setState({...this.state, loading: true});
+    fetch(`https://nutritionix-api.p.rapidapi.com/v1_1/search/${searchTerm}?fields=item_name%2Citem_id%2Cbrand_name%2Cnf_calories%2Cnf_total_fat%2Cnf_protein%2Cnf_total_carbohydrate`, {
+      "method": "GET",
+      "headers": {
+        "x-rapidapi-key": "d0c7efd202mshd71efa7aa963462p129b78jsn273f9b7e10d0",
+        "x-rapidapi-host": "nutritionix-api.p.rapidapi.com"
+      }
+    })
+      .then(response => response.json())
+      .then(json => { this.setState({...this.state, loading: false, found_foods: json }) })
+    ;
   }
 
   render() {
-    return (
-      <>
-        <form onSubmit={this.handleSubmit}>
-          <input type="text" placeholder="Search..." value={this.state.searchTerm} onChange={this.handleChange} />
-          <br />
-          <input type="submit" value="Search" />
-          <br />
-          <FoodList foods={this.props.foods} id={this.state.id}/>
-        </form>
-      </>
-    )
+    if (this.state.loading) {
+      return (
+        <>
+          <form onSubmit={this.handleSubmit}>
+            <input type="text" placeholder="Search..." value={this.state.searchTerm} onChange={this.handleChange} />
+            <br />
+            <input type="submit" value="Search" enabled={false}/>
+            <br />
+            <h2>Searching...</h2>
+          </form>
+        </>
+      )
+    }
+    else {
+      return (
+        <>
+          <form onSubmit={this.handleSubmit}>
+            <input type="text" placeholder="Search..." value={this.state.searchTerm} onChange={this.handleChange} />
+            <br />
+            <input type="submit" value="Search" />
+            <br />
+            <FoodList foods={this.state.found_foods} id={this.state.id}/>
+          </form>
+        </>
+      )
+    }
   }
 }
 
