@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import { fetchDays } from '../actions/dayActions'
 
 import DayDetail from './DayDetail';
 import FoodSearch from './FoodSearch';
@@ -10,30 +11,31 @@ import PantryDetail from './PantryDetail';
 import RecipesDetail from './RecipesDetail';
 
 
-class DetailView extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      loading: true
-    }
-  }
-
+class DetailContainer extends Component {
   componentDidMount() {
-    
+    this.props.dispatch(fetchDays());
   }
 
   render() {
-    return (
-      <>
-        <hr />
-        <Route exact path="/dash/days/:id" component={DayDetail} />
-        <Route exact path="/dash/days/:id/add" component={FoodSearch} />
-        <Route exact path="/dash/calendar" component={CalendarDetail} />
-        <Route exact path="/dash/pantry" component={PantryDetail} />
-        <Route exact path="/dash/recipes" component={RecipesDetail} />
-      </>
-    )
+    if(this.props.loading === true) {
+      return (
+        <>
+          <h2>Loading...</h2>
+        </>
+      );
+    }
+    else {
+      return (
+        <>
+          <hr />
+          <Route exact path="/dash/days/:id" component={DayDetail} />
+          <Route exact path="/dash/days/:id/add" component={FoodSearch} />
+          <Route exact path="/dash/calendar" component={CalendarDetail} />
+          <Route exact path="/dash/pantry" component={PantryDetail} />
+          <Route exact path="/dash/recipes" component={RecipesDetail} />
+        </>
+      );
+    }
   }
 }
 
@@ -43,10 +45,4 @@ const mapStateToProps = (state) => {
   }
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(DetailView);
+export default connect(mapStateToProps)(DetailContainer);

@@ -6,10 +6,6 @@ export default class DayDetail extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      loading: true,
-      id: props.match.params.id
-    }
   }
 
   dateStringWithHyphens(dateString) {
@@ -21,64 +17,11 @@ export default class DayDetail extends Component {
   }
 
   componentDidMount() {
-    fetch(`http://localhost:3000/days/${this.state.id}`)
-      .then(response => response.json())
-      .then(json => {
-        if(json.status === 404 && json.exception.includes("RecordNotFound")) {
-          fetch(
-            `http://localhost:3000/days`,
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-              },
-              body: JSON.stringify({day: {id: this.state.id, user_id: 1, date: new Date(this.dateStringWithHyphens(this.state.id)) }})
-            }
-          ).then(response => response.json()).then(json => {
-            this.setState({
-              ...this.state,
-              loading: false,
-              [json.data.attributes.id]: {
-                user_id: json.data.attributes.user_id,
-                date: json.data.attributes.date
-              }
-            })
-          })
-        } 
-        else {
-          this.setState({
-            ...this.state,
-            [this.state.id]: {
-              user_id: json.data.attributes.user_id,
-              date: json.data.attributes.date,
-              protein: 0,
-              carbs: 0,
-              fat: 0,
-              calories: 0
-            }
-          });
-
-          fetch(`http://localhost:3000/days/${this.state.id}/meals`)
-            .then(response => response.json())
-            .then(json => {
-              this.setState({
-                ...this.state,
-                loading: false,
-                [this.state.id]: {
-                  ...this.state[this.state.id],
-                  meals: json.data
-                }
-              })
-            });
-        }
-      })
-      .catch(err => console.log(err))
-    ;
+    
   }
 
   render() {
-    if(this.state.loading === true) {
+    if(1 == 1) {
       return (
         <h1>Loading...</h1>
       )
@@ -98,7 +41,7 @@ export default class DayDetail extends Component {
         <hr />
         <h2>Foods</h2>
         <br />
-        <h3>{this.state[this.state.id].meals.filter(meal => meal.attributes.name === "breakfast").map(m => <p>{m.attributes.food_id}</p>)}</h3>
+        <h3>LIST FOODS</h3>
         <br />
         <h3><NavLink to={`/dash/days/${this.state.id}/add`}>Add Food</NavLink></h3>
         </>

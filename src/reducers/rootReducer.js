@@ -24,7 +24,9 @@ export default function rootReducer(state = { foods: [], days: {}, loading: fals
       };
     case "ADD_DAYS":
       let days_hash = {};
-      action.days.forEach(day => { day_array[day.attributes.id] = day.attributes.date });
+      if (action.days) {
+        action.days.forEach(day => { days_hash[day.attributes.id] = day.attributes.date });
+      }
       return {
         ...state,
         days: days_hash,
