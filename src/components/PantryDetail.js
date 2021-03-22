@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-export default class PantryDetail extends Component {
+class PantryDetail extends Component {
 
   render() {
     return (
@@ -10,3 +11,11 @@ export default class PantryDetail extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    ...state
+  }
+};
+
+export default connect(mapStateToProps)(PantryDetail);

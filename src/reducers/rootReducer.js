@@ -11,6 +11,12 @@ export default function rootReducer(state = { foods: [], days: [], loading: fals
         foods: action.foods,
         loading: false
       };
+    case "ADD_FOOD":
+      return {
+        ...state,
+        foods: [...state.foods, action.food],
+        loading: false
+      };
     case "DELETE_FOOD":
       return {
         ...state,
@@ -26,6 +32,12 @@ export default function rootReducer(state = { foods: [], days: [], loading: fals
         days: action.days,
         loading: false
       };
+    case "ADD_DAY":
+      return {
+        ...state,
+        days: [...state.days, action.day],
+        loading: false
+      };
     case "DELETE_DAY":
       return {
         ...state,
@@ -35,6 +47,12 @@ export default function rootReducer(state = { foods: [], days: [], loading: fals
       return {
         ...state,
         meals: action.meals,
+        loading: false
+      };
+    case "ADD_MEAL":
+      return {
+        ...state,
+        meals: [...state.meals, action.meal],
         loading: false
       };
     case "DELETE_MEAL":

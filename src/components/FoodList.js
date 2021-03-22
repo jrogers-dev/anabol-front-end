@@ -1,65 +1,31 @@
 import React, { Component } from 'react';
+import {addFood} from '../actions/foodActions';
+import {addMeal} from '../actions/mealActions';
+import { connect } from 'react-redux';
+import { History } from 'history';
+
 
 
 class FoodList extends Component {
   
   handleClick = (event) => {
     event.preventDefault();
-    let selectedFood = this.props.foods.hits.filter(food => food._id === event.target.id)[0];
-
-    fetch(
-      `http://localhost:3000/foods`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        body: JSON.stringify({
-          food: {
-            rapidapi_id: selectedFood._id, 
-            user_id: 1, 
-            name: selectedFood.fields.item_name,
-            serving: selectedFood.fields.nf_serving_size_unit,
-            calories: selectedFood.fields.nf_calories,
-            fat: selectedFood.fields.nf_total_fat,
-            protein: selectedFood.fields.nf_protein,
-            carbohydrates: selectedFood.fields.nf_total_carbohydrate
-          }
-        })
-      }
-    )
-    .then(response => response.json())
-    .then(json => {
-      fetch(
-        `http://localhost:3000/meals`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-          },
-          body: JSON.stringify({
-            meal: {
-              name: event.target.value,
-              day_id: parseInt(this.props.id),
-              food_id: parseInt(json.data.id)
-            }
-          })
-        }
-      )
-      .then(response => response.json())
-      .then(json => console.log(json)) 
-      .catch(err => console.log(err));
-    }) 
-    .catch(err => console.log(err));
+    let selectedFood = this.props.found_foods.hits.filter(food => food._id === event.target.id)[0];
+    let food_exists = this.props.foods.find(food => food.attributes.rapidapi_id == selectedFood._id);
+    
+    if(food_exists){
+      this.props.dispatch(addMeal(event.target.value, parseInt(this.props.id), food_exists.id))
+    }
+    else{
+      this.props.dispatch(addFood(selectedFood, event.target.value, parseInt(this.props.id)));
+    }
   }
 
   render() {
-    if (this.props.foods.hits) {
+    if (this.props.found_foods.hits) {
       return(
         <div>
-          {this.props.foods.hits.map((food, index) => {
+          {this.props.found_foods.hits.map((food, index) => {
             return (
               <div>
                 <p>{food.fields.brand_name} {food.fields.item_name}</p>
@@ -91,4 +57,10 @@ class FoodList extends Component {
 }
 
 
-export default FoodList;
+const mapStateToProps = (state) => {
+  return {
+    ...state
+  }
+};
+
+export default connect(mapStateToProps)(FoodList);

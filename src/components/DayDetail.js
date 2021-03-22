@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import { addDay } from '../actions/dayActions';
 
 
-export default class DayDetail extends Component {
+class DayDetail extends Component {
   constructor(props) {
     super(props);
 
@@ -61,32 +64,40 @@ export default class DayDetail extends Component {
   render() {
     return (
       <>
-      <h1>Summary for: {new Date(this.props.days.filter(day => day.id === this.props.match.params.id)[0].attributes.date).toUTCString()}</h1>
-      <br />
-      <h3>Protein: {this.state.todays_protein}g</h3>
-      <br />
-      <h3>Carbs: {this.state.todays_fat}g</h3>
-      <br />
-      <h3>Fat: {this.state.todays_carbs}g</h3>
-      <br />
-      <h3>Calories: {this.state.todays_calories}kcal</h3>
-      <hr />
-      <h2>Foods</h2>
-      <h4>&emsp;<NavLink to={`/dash/days/${this.props.match.params.id}/add`}>Add Food</NavLink></h4>
-      <br />
-      <h3>Breakfast</h3>
-      <h4>{this.state.todays_breakfast.map(food => <p>&emsp;{food.attributes.name}</p>)}</h4>
-      <br />
-      <h3>Lunch</h3>
-      <h4>{this.state.todays_lunch.map(food => <p>&emsp;{food.attributes.name}</p>)}</h4>
-      <br />
-      <h3>Dinner</h3>
-      <h4>{this.state.todays_dinner.map(food => <p>&emsp;{food.attributes.name}</p>)}</h4>
-      <br />
-      <h3>Snacks</h3>
-      <h4>{this.state.todays_snacks.map(food => <p>&emsp;{food.attributes.name}</p>)}</h4>
-      <br />
+        <h1>Summary for: {new Date(this.props.days.filter(day => day.id === this.props.match.params.id)[0].attributes.date).toUTCString()}</h1>
+        <br />
+        <h3>Protein: {this.state.todays_protein}g</h3>
+        <br />
+        <h3>Carbs: {this.state.todays_fat}g</h3>
+        <br />
+        <h3>Fat: {this.state.todays_carbs}g</h3>
+        <br />
+        <h3>Calories: {this.state.todays_calories}kcal</h3>
+        <hr />
+        <h2>Foods</h2>
+        <h4>&emsp;<NavLink to={`/dash/days/${this.props.match.params.id}/add`}>Add Food</NavLink></h4>
+        <br />
+        <h3>Breakfast</h3>
+        <h4>{this.state.todays_breakfast.map(food => <p>&emsp;{food.attributes.name}</p>)}</h4>
+        <br />
+        <h3>Lunch</h3>
+        <h4>{this.state.todays_lunch.map(food => <p>&emsp;{food.attributes.name}</p>)}</h4>
+        <br />
+        <h3>Dinner</h3>
+        <h4>{this.state.todays_dinner.map(food => <p>&emsp;{food.attributes.name}</p>)}</h4>
+        <br />
+        <h3>Snacks</h3>
+        <h4>{this.state.todays_snacks.map(food => <p>&emsp;{food.attributes.name}</p>)}</h4>
+        <br />
       </>
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    ...state
+  }
+};
+
+export default connect(mapStateToProps)(DayDetail);

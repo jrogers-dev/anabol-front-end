@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchFoods } from '../actions/foodActions';
 
 import FoodList from './FoodList';
 
@@ -47,7 +46,7 @@ class FoodSearch extends Component {
           <form onSubmit={this.handleSubmit}>
             <input type="text" placeholder="Search..." value={this.state.searchTerm} onChange={this.handleChange} />
             <br />
-            <input type="submit" value="Search" enabled={false}/>
+            <input type="submit" value="Search"/>
             <br />
             <h2>Searching...</h2>
           </form>
@@ -62,7 +61,7 @@ class FoodSearch extends Component {
             <br />
             <input type="submit" value="Search" />
             <br />
-            <FoodList foods={this.state.found_foods} id={this.state.id}/>
+            <FoodList found_foods={this.state.found_foods} id={this.state.id}/>
           </form>
         </>
       )
@@ -72,14 +71,8 @@ class FoodSearch extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    foods: state.foods
+    ...state
   }
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchFoods: (searchTerm) => dispatch(fetchFoods(searchTerm))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(FoodSearch);
+export default connect(mapStateToProps)(FoodSearch);

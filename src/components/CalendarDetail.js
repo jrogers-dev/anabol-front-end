@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-export default class CalendarDetail extends Component {
+class CalendarDetail extends Component {
   constructor(props) {
     super(props);
 
@@ -35,12 +36,10 @@ export default class CalendarDetail extends Component {
   }
 }
 
-//new Date(day.attributes.date).toLocaleString().split(',')[0]
-/*{this.props.days.map((day => <p>{
-  <NavLink 
-    to={`/dash/days/${this.dateString(new Date(day.attributes.date))}`}
-    exact 
-  >
-    {day.attributes.date}
-  </NavLink>
-}</p>))}*/
+const mapStateToProps = (state) => {
+  return {
+    ...state
+  }
+};
+
+export default connect(mapStateToProps)(CalendarDetail);
