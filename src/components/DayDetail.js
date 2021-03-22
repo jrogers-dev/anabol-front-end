@@ -9,6 +9,11 @@ class DayDetail extends Component {
   constructor(props) {
     super(props);
 
+    let day_exists = this.props.days.find(day => day.id == this.props.match.params.id);
+    if(!day_exists) {
+      this.props.dispatch(addDay(this.props.match.params.id, this.dateStringWithHyphens(this.props.match.params.id)));
+    }
+
     this.state = {
       todays_meals: [],
       todays_foods: [],
