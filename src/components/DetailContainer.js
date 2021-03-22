@@ -3,6 +3,8 @@ import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { fetchDays } from '../actions/dayActions'
+import { fetchFoods } from '../actions/foodActions'
+import { fetchMeals } from '../actions/mealActions'
 
 import DayDetail from './DayDetail';
 import FoodSearch from './FoodSearch';
@@ -14,6 +16,8 @@ import RecipesDetail from './RecipesDetail';
 class DetailContainer extends Component {
   componentDidMount() {
     this.props.dispatch(fetchDays());
+    this.props.dispatch(fetchFoods());
+    this.props.dispatch(fetchMeals());
   }
 
   render() {
@@ -28,7 +32,7 @@ class DetailContainer extends Component {
       return (
         <>
           <hr />
-          <Route exact path="/dash/days/:id" render={(props) => <DayDetail {...props} days={this.props.days}/>} />
+          <Route exact path="/dash/days/:id" render={(props) => <DayDetail {...props} days={this.props.days} meals={this.props.meals} foods={this.props.foods}/>} />
           <Route exact path="/dash/days/:id/add" component={FoodSearch} />
           <Route exact path="/dash/calendar" render={(props) => <CalendarDetail {...props} days={this.props.days}/>} />
           <Route exact path="/dash/pantry" render={(props) => <PantryDetail {...props} foods={this.props.foods}/>} />

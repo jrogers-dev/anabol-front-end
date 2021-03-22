@@ -1,7 +1,7 @@
-export function fetchDays() {
+export function fetchMeals() {
   return (dispatch) => {
     dispatch({type: "LOADING"});
-    fetch(`http://localhost:3000/days`, {
+    fetch(`http://localhost:3000/meals`, {
       "method": "GET",
       "headers": {
         "Content-Type": "application/json",
@@ -9,6 +9,6 @@ export function fetchDays() {
       }
     })
     .then(response => response.json())
-    .then(json => { dispatch({ type: "LOAD_DAYS", days: json.data }) });
+    .then(json => { dispatch({ type: "LOAD_MEALS", meals: json.data }) });
   }
 }

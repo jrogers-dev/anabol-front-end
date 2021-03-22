@@ -5,10 +5,6 @@ export default class CalendarDetail extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      loading: true,
-      days: []
-    }
   }
 
   dateString(date) {
@@ -21,26 +17,11 @@ export default class CalendarDetail extends Component {
     + pad(date.getDate()+1);
   }
 
-  componentDidMount() {
-    fetch(`http://localhost:3000/days`)
-      .then(response => response.json())
-      .then(json => {
-        this.setState({
-          loading: false,
-          days: json.data
-        })
-      })
-      .catch(err => console.log(err))
-    ;
-  }
-
   render() {
-    if(this.state.loading)
-      return(<h1>Loading...</h1>)
-    else {
+    if(this.props.days) {
       return (
         <>
-        {this.state.days.map((day => <p>{
+        {this.props.days.map((day => <p>{
           <NavLink 
             to={`/dash/days/${this.dateString(new Date(day.attributes.date))}`}
             exact 
@@ -55,3 +36,11 @@ export default class CalendarDetail extends Component {
 }
 
 //new Date(day.attributes.date).toLocaleString().split(',')[0]
+/*{this.props.days.map((day => <p>{
+  <NavLink 
+    to={`/dash/days/${this.dateString(new Date(day.attributes.date))}`}
+    exact 
+  >
+    {day.attributes.date}
+  </NavLink>
+}</p>))}*/

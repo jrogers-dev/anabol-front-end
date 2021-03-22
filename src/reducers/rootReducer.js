@@ -1,4 +1,4 @@
-export default function rootReducer(state = { foods: [], days: {}, loading: false }, action) {
+export default function rootReducer(state = { foods: [], days: [], loading: false }, action) {
   switch (action.type) {
     case "LOADING":
       return {
@@ -23,7 +23,7 @@ export default function rootReducer(state = { foods: [], days: {}, loading: fals
       }
       return {
         ...state,
-        days: days_hash,
+        days: action.days,
         loading: false
       };
     case "DELETE_DAY":
