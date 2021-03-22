@@ -15,7 +15,7 @@ export default class VerticalNavBar extends Component {
 
   render() {
     return (
-      <>
+      <div className="flex flex-col h-screen">
         <NavLink 
           to={`/dash/days/${this.dateString(new Date())}`}
           exact 
@@ -50,7 +50,7 @@ export default class VerticalNavBar extends Component {
           style={{color: "lightblue"}} 
           activeStyle={{ color: "green"}}
         >Log Out</NavLink>
-      </>
+      </div>
     )
   }
 }

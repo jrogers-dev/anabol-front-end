@@ -21,16 +21,17 @@ class CalendarDetail extends Component {
   render() {
     if(this.props.days) {
       return (
-        <>
+        <div className="flex flex-col h-full text-white pt-5">
         {this.props.days.map((day => <p>{
           <NavLink 
+            className="bg-blue-900 rounded px-2 w-24 text-center ml-4 text-xl"
             to={`/dash/days/${this.dateString(new Date(day.attributes.date))}`}
             exact 
           >
             {day.attributes.date}
           </NavLink>
         }</p>))}
-        </>
+        </div>
       )
     }
   }

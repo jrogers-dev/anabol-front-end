@@ -63,33 +63,38 @@ class DayDetail extends Component {
 
   render() {
     return (
-      <>
-        <h1>Summary for: {new Date(this.props.days.filter(day => day.id === this.props.match.params.id)[0].attributes.date).toUTCString()}</h1>
+      <div className="flex flex-col h-full text-white">
+        <div className="text-center text-3xl py-4">{new Date(this.props.days.filter(day => day.id === this.props.match.params.id)[0].attributes.date).toUTCString().slice(0, -13)}</div>
         <br />
-        <h3>Protein: {this.state.todays_protein}g</h3>
-        <br />
-        <h3>Carbs: {this.state.todays_fat}g</h3>
-        <br />
-        <h3>Fat: {this.state.todays_carbs}g</h3>
-        <br />
-        <h3>Calories: {this.state.todays_calories}kcal</h3>
+        <div className="grid grid-cols-3">
+          <div className="text-center text-xl">Protein: {Math.round(this.state.todays_protein)}g</div>
+          <div className="text-center text-xl">Carbs: {Math.round(this.state.todays_fat)}g</div>
+          <div className="text-center text-xl">Fat: {Math.round(this.state.todays_carbs)}g</div>
+          <br />
+          <div className="text-center col-span-3 text-2xl">Calories: {Math.round(this.state.todays_calories)} kcal</div>
+          <br />
+        </div>
         <hr />
-        <h2>Foods</h2>
-        <h4>&emsp;<NavLink to={`/dash/days/${this.props.match.params.id}/add`}>Add Food</NavLink></h4>
+        <div className="flex-col text-center text-3xl py-4">
+          Foods
+        </div>
+        <NavLink className="bg-blue-900 rounded px-1 w-24 text-center -mt-11 ml-4" to={`/dash/days/${this.props.match.params.id}/add`}>Add Food</NavLink>
         <br />
-        <h3>Breakfast</h3>
-        <h4>{this.state.todays_breakfast.map(food => <p>&emsp;{food.attributes.name}</p>)}</h4>
-        <br />
-        <h3>Lunch</h3>
-        <h4>{this.state.todays_lunch.map(food => <p>&emsp;{food.attributes.name}</p>)}</h4>
-        <br />
-        <h3>Dinner</h3>
-        <h4>{this.state.todays_dinner.map(food => <p>&emsp;{food.attributes.name}</p>)}</h4>
-        <br />
-        <h3>Snacks</h3>
-        <h4>{this.state.todays_snacks.map(food => <p>&emsp;{food.attributes.name}</p>)}</h4>
-        <br />
-      </>
+        <div className="ml-5">
+          Breakfast
+          {this.state.todays_breakfast.map(food => <p>&emsp;{food.attributes.name}</p>)}
+          <br />
+          Lunch
+          {this.state.todays_lunch.map(food => <p>&emsp;{food.attributes.name}</p>)}
+          <br />
+          Dinner
+          {this.state.todays_dinner.map(food => <p>&emsp;{food.attributes.name}</p>)}
+          <br />
+          Snacks
+          {this.state.todays_snacks.map(food => <p>&emsp;{food.attributes.name}</p>)}
+          <br />
+        </div>
+      </div>
     );
   }
 }

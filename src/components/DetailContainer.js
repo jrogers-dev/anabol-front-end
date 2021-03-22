@@ -31,7 +31,6 @@ class DetailContainer extends Component {
     else {
       return (
         <>
-          <hr />
           <Route exact path="/dash/days/:id" component={DayDetail} />
           <Route exact path="/dash/days/:id/add" component={FoodSearch} />
           <Route exact path="/dash/calendar" component={CalendarDetail} />

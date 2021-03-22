@@ -22,18 +22,18 @@ export default class LoginForm extends Component {
 
   render() {
     return (
-      <>
-        <h2><center>Anabol.</center></h2>
+      <div className="flex flex-col bg-black h-screen py-20">
+        <div className="flex justify-center text-4xl text-white">Anabol.</div>
         <br/>
-        <form onSubmit={this.handleSubmit}>
-          <input onChange={this.handleChange} type="text" name="email" placeholder="Email..."></input>
+        <form className="grid grid-rows-3 justify-center" onSubmit={this.handleSubmit}>
+          <input className="text-black rounded px-1" onChange={this.handleChange} type="text" name="email" placeholder="Email..."></input>
           <br/>
-          <input type="password" name="password" placeholder="Password..."></input>
+          <input className="text-black rounded px-1" type="password" name="password" placeholder="Password..."></input>
           <br/>
           <br/>
-          <input type="submit" name="submit" value="Login"></input>
+          <input className="bg-green-500 rounded px-1" type="submit" name="submit" value="Login"></input>
         </form>
-      </>
+      </div>
     )
   }
 }

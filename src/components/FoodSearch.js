@@ -42,28 +42,30 @@ class FoodSearch extends Component {
   render() {
     if (this.state.loading) {
       return (
-        <>
-          <form onSubmit={this.handleSubmit}>
-            <input type="text" placeholder="Search..." value={this.state.searchTerm} onChange={this.handleChange} />
+        <div className="flex flex-col h-full text-white mt-12">
+          <form className="grid grid-rows-1 justify-center text-center" onSubmit={this.handleSubmit}>
+            <input className="text-black rounded px-1" type="text" placeholder="Search..." value={this.state.searchTerm} onChange={this.handleChange} />
             <br />
-            <input type="submit" value="Search"/>
+            <input className="bg-green-800 rounded px-1" type="submit" value="Search"/>
             <br />
             <h2>Searching...</h2>
           </form>
-        </>
+        </div>
       )
     }
     else {
       return (
-        <>
-          <form onSubmit={this.handleSubmit}>
-            <input type="text" placeholder="Search..." value={this.state.searchTerm} onChange={this.handleChange} />
+        <div className="flex flex-col h-full text-white mt-12">
+          <form className="grid grid-rows-1 justify-center text-center" onSubmit={this.handleSubmit}>
+            <input className="text-black rounded px-1" type="text" placeholder="Search..." value={this.state.searchTerm} onChange={this.handleChange} />
             <br />
-            <input type="submit" value="Search" />
+            <input className="bg-green-800 rounded px-1" type="submit" value="Search" />
             <br />
-            <FoodList found_foods={this.state.found_foods} id={this.state.id}/>
           </form>
-        </>
+          <div className="ml-5">
+            <FoodList found_foods={this.state.found_foods} id={this.state.id}/>
+          </div>
+        </div>
       )
     }
   }

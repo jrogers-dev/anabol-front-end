@@ -33,11 +33,11 @@ class FoodList extends Component {
                 <p>&emsp;Total Fat: {food.fields.nf_total_fat}g</p>
                 <p>&emsp;Total Carbs: {food.fields.nf_total_carbohydrate}g</p>
                 <p>&emsp;Protein: {food.fields.nf_protein}g</p>
-                <p>
-                  Add to:&emsp;<button id={food.fields.item_id} onClick={this.handleClick} value="breakfast">Breakfast</button>
-                  <button id={food.fields.item_id} onClick={this.handleClick} value="lunch">Lunch</button>
-                  <button id={food.fields.item_id} onClick={this.handleClick} value="dinner">Dinner</button>
-                  <button id={food.fields.item_id} onClick={this.handleClick} value="snacks">Snacks</button>
+                <p className="mt-1">
+                  Add to:&emsp;<button className="bg-blue-900 rounded px-1 mx-1" id={food.fields.item_id} onClick={this.handleClick} value="breakfast">Breakfast</button>
+                  <button className="bg-blue-900 rounded px-1 mx-1" id={food.fields.item_id} onClick={this.handleClick} value="lunch">Lunch</button>
+                  <button className="bg-blue-900 rounded px-1 mx-1" id={food.fields.item_id} onClick={this.handleClick} value="dinner">Dinner</button>
+                  <button className="bg-blue-900 rounded px-1 mx-1" id={food.fields.item_id} onClick={this.handleClick} value="snacks">Snacks</button>
                 </p>
                 <br />
               </div>

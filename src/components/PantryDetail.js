@@ -5,9 +5,9 @@ class PantryDetail extends Component {
 
   render() {
     return (
-      <>
-       <span>Pantry Detail!</span>
-      </>
+      <div className="flex flex-col h-full text-white text-center mt-20 text-4xl">
+       <span>Coming Soon!</span>
+      </div>
     )
   }
 }
